@@ -52,3 +52,5 @@ const  UserSchema = new mongoose.Schema(
 	},
 	{ timestamps: true } //データを格納したタイムスタンプ
 );
+
+module.exports = mongoose.model("User", UserSchema);
