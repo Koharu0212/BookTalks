@@ -44,4 +44,39 @@ router.delete("/:id", async (req, res) => { //id: 投稿のID
 	}
 })
 
+//特定の投稿を取得する
+router.get("/:id", async (req, res) => { //id: 投稿のID
+	try {
+		const post = await Post.findById(req.params.id); //URLのidを指定する
+		return res.status(200).json(post);
+	} catch (err) {
+		return res.status(403).json(err);
+	}
+})
+
+//特定の投稿にいいねを押す
+router.put("/:id/like", async (req, res) => { 
+	try {
+		const post = await Post.findById(req.params.id);  //いいねする投稿
+		if (!post.likes.includes(req.body.userId)) { //まだいいねを押していない場合、いいねを押せる
+			await post.updateOne({
+				$push: {
+					likes: req.body.userId,
+				},
+			});
+			return res.status(200).json("投稿にいいねを押しました");
+		} else {
+			//いいねしているユーザIDを取り除く
+			await post.updateOne({
+				$pull: {
+					likes: req.body.userId,
+				},
+			});
+			return res.status(403).json("投稿のいいねを外しました");
+		}
+	} catch (err) {
+		return res.status(500).json(err);
+	}
+})
+
 module.exports = router;
