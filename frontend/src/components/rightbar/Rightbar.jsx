@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Rightbar.css"
+import { Users } from "../../dummyData";
 
 export default function Rightbar() {
   return (
