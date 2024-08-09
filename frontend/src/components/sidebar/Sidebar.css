@@ -54,17 +54,3 @@
 	margin: 0;
 	list-style: none;
 }
-
-.sidebarFriend {
-	display: flex;
-	align-items: center;
-	margin-bottom: 15px;
-}
-
-.sidebarFriendImg {
-	width: 32px;
-	height: 32px;
-	object-fit: cover;
-	border-radius: 50%;
-	margin-right: 10px;
-}
